@@ -5,8 +5,10 @@ import openai
 import os
 import time
 import playsound
+import config
 import speech_recognition as sr
 from gtts import gTTS
+
 
 
 def speak(text):
@@ -32,7 +34,7 @@ def get_audio():
 def say(text):
     response = requests.post(
         'https://api.openai.com/v1/completions',
-        headers = {'Content-Type' : 'application/json','Authorization' : 'Bearer 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'},
+        headers = {'Content-Type' : 'application/json','Authorization' : 'Bearer %s' % (config.api_token,)},
         json = {"model" : "text-davinci-003", "prompt" : text, "max_tokens" : 2040, "temperature":1.5})
     #requests.post("example-url", headers={"Content-Type": "application/json", "Authorization": f"Bearer {token}"}, data={"the": "data"})
     data = response.json()
